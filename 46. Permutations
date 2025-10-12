@@ -1,0 +1,29 @@
+class Solution {
+public:
+  void solve(vector<int>&s,int start,vector<vector<int>>&v)
+   {
+       if(start==s.size()-1)
+       {
+           v.push_back(s);
+           return;
+       }
+       unordered_set<char> mp;
+       for(int i=start;i<s.size();i++)
+       {
+          
+           if(mp.find(s[i])==mp.end())
+           {
+               mp.insert(s[i]);
+               swap(s[start],s[i]);
+               solve(s,start+1,v);
+               swap(s[start],s[i]);
+           }
+       }
+   }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>v;
+        solve(nums,0,v);
+        return v;
+
+    }
+};
